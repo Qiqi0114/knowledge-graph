@@ -146,7 +146,7 @@
 import { reactive } from "@vue/reactivity";
 import { ElMessage, ElMessageBox, FormInstance } from "element-plus";
 import { onMounted, ref } from "vue";
-import { addUserManagementAPI, deleteUserManagementAPI, getUserActivationStatusAPI, getUserManagementAPI, updateUserManagementAPI, UserManagementAPI } from "../../api/index";
+import { addUserManagementAPI, deleteUserManagementAPI, getUserActivationStatusAPI, getUserManagementAPI, updateUserManagementAPI, UserManagementAPI } from "../../api/userManagement";
 //加载
 const loading = ref<boolean>(false)
 //table赋值
