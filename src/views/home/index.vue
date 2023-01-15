@@ -46,6 +46,7 @@
 <script lang="ts" setup>
 import { useRoute } from "vue-router";
 import { ref } from "@vue/reactivity";
+import { loginAPI } from "../../api";
 const route = useRoute();
 
 //是否水平折叠收起菜单
@@ -67,6 +68,11 @@ document.getElementById("router-container")!.style.width="calc(100% - 63px)" ;
 document.getElementById("router-container")!.style.width="calc(100% - 200px)" ;
 }
 }
+
+loginAPI({userPhone:'18804236200',passWord:'1234567'}).then((res: any) => {
+     console.log(res, "res");
+});
+
 </script>
 
 <style lang="scss" scoped>
