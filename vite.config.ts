@@ -6,6 +6,9 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   server: {
+    host: "localhost",
+    port: 8080,
+    open: true,
     // 跨域的写法
         proxy: {
           '/api': {
