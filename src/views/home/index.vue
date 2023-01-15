@@ -96,12 +96,10 @@ loginAPI({userPhone:'18804236200',passWord:'1234567'}).then((res: any) => {
 
 .router-container{
   overflow: hidden;
-  position: absolute;
   right: 0;
-  width: calc(100% - 200px);
+  width: 100%;
   margin-bottom: 0px;
   height: 100%;
-  overflow-y: scroll;
   z-index: 88;
 }
 .collapse-bg{
