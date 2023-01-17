@@ -2,7 +2,7 @@ import request from "../utils/request"
 
 //获取用户管理信息列表
 export function UserManagementAPI(
-  params: {
+  param: {
     //分页参数
     pageNum:number,
     pageSize:number,
@@ -10,26 +10,26 @@ export function UserManagementAPI(
     userName:string
   }) {
   return request({
-    url: '/server/user/userListByPage',
+    url: '/user_service/server/user/userListByPage',
     method: 'post',
-    params
+    data:param
   })
 }
 //根据id查询用户信息
 export function getUserManagementAPI(
-  params: {
+  param: {
     //用户id
     id:string,
   }) {
   return request({
-    url: '/server/user/1',
+    url: '/user_service/server/user/getUserById',
     method: 'get',
-    params
+    params:param
   })
 }
 //修改用户信息
 export function updateUserManagementAPI(
-  params: {
+  param: {
     //用户id
     id:string,
     //用户名称
@@ -48,7 +48,7 @@ export function updateUserManagementAPI(
   return request({
     url: '/server/user',
     method: 'post',
-    params
+    params:param
   })
 }
 //删除用户
@@ -63,7 +63,7 @@ export function deleteUserManagementAPI(
 }
 //添加用户
 export function addUserManagementAPI(
-  params: {
+  param: {
     //用户名称
     userName:string,
     //性别
@@ -78,12 +78,12 @@ export function addUserManagementAPI(
   return request({
     url: '/server/user/',
     method: 'post',
-    params
+    params:param
   })
 }
 //用户账号封禁 激活
 export function getUserActivationStatusAPI(
-  params: {
+  param: {
     //用户id
     id:string,
     //用户状态
@@ -92,6 +92,6 @@ export function getUserActivationStatusAPI(
   return request({
     url: '/server/user/accountActivation',
     method: 'get',
-    params
+    params:param
   })
 }

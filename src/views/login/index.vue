@@ -40,7 +40,7 @@ const loginForm = reactive({
       });
 
 const submitForm = async(loginFormRef:any) => {
-    const res = await loginAPI({userPhone:'18804236200',passWord:'1234567'})
+    const res = await loginAPI({userPhone:'18804236200',passWord:'123456'})
     if(res.data.code == '200'){
         router.push({ path: "/home", query: {} })
     }

@@ -90,7 +90,7 @@ document.getElementById("router-container")!.style.width="calc(100% - 200px)" ;
 }
 }
 
-loginAPI({userPhone:'18804236200',passWord:'1234567'}).then((res: any) => {
+loginAPI({userPhone:'18804236200',passWord:'123456'}).then((res: any) => {
      console.log(res, "res");
 });
 

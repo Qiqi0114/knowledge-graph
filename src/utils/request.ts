@@ -12,7 +12,7 @@ const service = axios.create({
 
 // 请求前置拦截器
 service.interceptors.request.use((config) => {
-    config.headers['token'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjF9.hsq8USXW4mpytIilmB3CnEYutxIJ4Fo4tR8aUiV6yJw'
+  config.headers.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEwMDAwMDAwMDAwMDAwMDAwMDB9.BJQbLvTp6uPkj9Wbd5vQWKAZIVX2JzpPuc-0stXiqZ4'
   if (config.method === 'post' && !config.data) {
     config.data = config.params
     config.params = null

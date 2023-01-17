@@ -12,7 +12,7 @@ export default defineConfig({
     // 跨域的写法
         proxy: {
           '/api': {
-            target: 'http://43.143.229.251:8001', // 实际请求地址
+            target: 'http://43.143.229.251:8090', // 实际请求地址
             changeOrigin: true, // 允许跨域
             rewrite: (path) => path.replace(/^\/api/, ""),
           },
