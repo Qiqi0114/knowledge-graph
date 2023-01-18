@@ -48,9 +48,9 @@
                         <el-table-column prop="userEmail" label="用户邮箱" min-width="120" />
                         <el-table-column prop="userStatic" label="用户状态" min-width="120">
                             <template #default="scope">
-                                <el-button type="text" :disabled="scope.row.userStatic ? true : false"
-                                    @click="updateActivationStatus(scope.row,true)">激活</el-button>
                                 <el-button type="text" :disabled="scope.row.userStatic ? false : true"
+                                    @click="updateActivationStatus(scope.row,true)">激活</el-button>
+                                <el-button type="text" :disabled="scope.row.userStatic ? true : false"
                                     @click="updateActivationStatus(scope.row,false)">封禁</el-button>
                             </template>
                         </el-table-column>
@@ -115,9 +115,6 @@
                             <el-radio label="男">男</el-radio>
                             <el-radio label="女">女</el-radio>
                             </el-radio-group>
-                        </el-form-item>
-                        <el-form-item label="密码">
-                            <el-input v-model="updateForm.userForm.passWord"></el-input>
                         </el-form-item>
                         <el-form-item label="电话">
                             <el-input v-model="updateForm.userForm.userPhone"></el-input>
@@ -202,7 +199,6 @@ const addForm = reactive({
         id:'',
         userName:'',
         userSex:'',
-        passWord:'',
         userPhone:'',
         userEmail:'',
         userStatic:false,
@@ -244,7 +240,6 @@ const updateForm = reactive({
         id:'',
         userName:'',
         userSex:'',
-        passWord:'',
         userPhone:'',
         userEmail:'',
         userStatic:false,
@@ -347,7 +342,6 @@ const updateUserManagementById = async () => {
             id:updateForm.userForm.id,//用户id
             userName:updateForm.userForm.userName,//用户名称
             userSex:updateForm.userForm.userSex,//性别
-            passWord:updateForm.userForm.passWord,//密码
             userPhone:updateForm.userForm.userPhone,//电话
             userEmail:updateForm.userForm.userEmail,//邮箱
             userStatic:updateForm.userForm.userStatic,//用户状态

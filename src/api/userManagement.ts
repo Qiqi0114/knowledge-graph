@@ -36,8 +36,6 @@ export function updateUserManagementAPI(
     userName:string,
     //性别
     userSex:string,
-    //密码
-    passWord:string,
     //电话
     userPhone:string,
     //邮箱
@@ -46,9 +44,9 @@ export function updateUserManagementAPI(
     userStatic:boolean,
   }) {
   return request({
-    url: '/server/user',
-    method: 'post',
-    params:param
+    url: '/user_service/server/user',
+    method: 'put',
+    data:param
   })
 }
 //删除用户
@@ -56,7 +54,7 @@ export function deleteUserManagementAPI(
   param: any
   ) {
   return request({
-    url: '/server/user/',
+    url: '/user_service/server/user/',
     method: 'delete',
     params:param
   })
@@ -76,7 +74,7 @@ export function addUserManagementAPI(
     userStatic:boolean,
   }) {
   return request({
-    url: '/server/user/',
+    url: '/user_service/server/user/',
     method: 'post',
     params:param
   })
@@ -90,7 +88,7 @@ export function getUserActivationStatusAPI(
     userStatic:boolean
   }) {
   return request({
-    url: '/server/user/accountActivation',
+    url: '/user_service/server/user/accountActivation',
     method: 'get',
     params:param
   })
