@@ -126,7 +126,7 @@ ElMessageBox.confirm("确认删除?", {
       //删除的过渡效果
       loading.value = true;
       const res = await deleteBookManagementAPI({id:row.id});
-      if (res.data.code === "200") {
+      if (res.data.code == 200) {
           ElMessage({
               message: "删除成功",
               duration: 1500,
@@ -141,14 +141,14 @@ ElMessageBox.confirm("确认删除?", {
   .catch(() => {console.log('erroe');});
 }
 //书籍上架下架 getBookOnAndOffAPI
-const updateActivationStatus = async(row,type) => {
+const updateActivationStatus = async(row:any,type:boolean) => {
 loading.value = true;
 try{
   const res = await getBookOnAndOffAPI({
       id:row.id,
       bookStatic:type
   })
-  if (res.data.code === "200") {
+  if (res.data.code == 200) {
       ElMessage({
           message: res.data.msg,
           duration: 5000,

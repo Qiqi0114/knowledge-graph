@@ -9,7 +9,7 @@ export function BookManagementAPI(
       bookName:string
     }) {
     return request({
-      url: '/service/book/getPageBookByBookName',
+      url: '/service_book/service/book/getPageBookByBookName',
       method: 'post',
       params
     })
@@ -17,16 +17,17 @@ export function BookManagementAPI(
 
   //删除书籍
   export function deleteBookManagementAPI(
-    param: any
-    ) {
+    params:{
+      id:string,
+    }
+  ) {
     return request({
-      url: '/service/book',
+      url: '/service_book//service/book/'+params.id,
       method: 'delete',
-      params:param
     })
   }
 
-  //用户账号封禁 激活
+  //书籍上架下架
   export function getBookOnAndOffAPI(
     params: {
       //用户id
@@ -35,8 +36,7 @@ export function BookManagementAPI(
       bookStatic:boolean
     }) {
     return request({
-      url: '/service/book/bookShelf',
+      url: '/service_book/service/book/bookShelf/'+params.id+'/'+params.bookStatic,
       method: 'put',
-      params
     })
   }
