@@ -214,7 +214,7 @@ const addConfirm = async() =>{
             userEmail:addForm.userForm.userEmail,
             userStatic:addForm.userForm.userStatic,
         })
-                if (res.data.code === "200") {
+                if (res.data.code == 200) {
             ElMessage({
                 message: res.data.msg,
                 duration: 5000,
@@ -248,13 +248,13 @@ const updateForm = reactive({
 //编辑用户信息
 const updateUserManagement = async(row:any) =>{
     dialogFormVisible.value = true;
-    loadUserManagementById(row.id)
+    await loadUserManagementById(row.id)
 }
 //确认修改用户信息
 const updateConfirm = async() =>{
-    updateUserManagementById()
+    await updateUserManagementById()
     dialogFormVisible.value = false;
-    loadUserManagementInfoList()
+    await loadUserManagementInfoList()
 }
 //删除用户信息
 const deleteUserManagement = async(row:any) => {
@@ -267,7 +267,7 @@ const deleteUserManagement = async(row:any) => {
             //删除的过渡效果
             loading.value = true;
             const res = await deleteUserManagementAPI({id:row.id});
-            if (res.data.code === "200") {
+            if (res.data.code == 200) {
                 ElMessage({
                     message: "删除成功",
                     duration: 1500,
@@ -282,14 +282,14 @@ const deleteUserManagement = async(row:any) => {
         .catch(() => {console.log('erroe');});
 }
 //激活封禁用户状态 getUserActivationStatusAPI
-const updateActivationStatus = async(row,type) => {
+const updateActivationStatus = async(row:any,type:boolean) => {
     loading.value = true;
     try{
         const res = await getUserActivationStatusAPI({
             id:row.id,
             userStatic:type
         })
-        if (res.data.code === "200") {
+        if (res.data.code == 200) {
             ElMessage({
                 message: res.data.msg,
                 duration: 5000,
@@ -305,6 +305,7 @@ const updateActivationStatus = async(row,type) => {
         }
     }catch(error){}
     loading.value = false;
+    loadUserManagementInfoList();
 }
 //获取列表
 const loadUserManagementInfoList = async () => {
@@ -346,7 +347,7 @@ const updateUserManagementById = async () => {
             userEmail:updateForm.userForm.userEmail,//邮箱
             userStatic:updateForm.userForm.userStatic,//用户状态
         })
-        if (res.data.code === "200") {
+        if (res.data.code == 200) {
             ElMessage({
                 message: res.data.msg,
                 duration: 5000,
