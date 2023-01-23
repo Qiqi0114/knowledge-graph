@@ -54,12 +54,7 @@
                                     @click="updateActivationStatus(scope.row,false)">封禁</el-button>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="roleId" label="角色id" min-width="85">
-                            <template #default="scope">
-                              <span v-if="scope.row.roleId === '1'">管理员</span>
-                              <span v-if="scope.row.roleId === '2'">用户</span>
-                            </template>
-                        </el-table-column>
+                        <el-table-column prop="roleId" label="角色id" min-width="85"/>
                     </el-table>
                 </div>
                 <!--分页器 start-->
