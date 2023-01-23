@@ -18,12 +18,29 @@ const routes:Array<RouteRecordRaw> = [
     component: () => import("../views/home/index.vue"),
     children: [
       {
-          path: "/home/userManagement",
+          path: "/home/user",
           name: "userManagement",
           meta: {
               title: "用户管理",
           },
-          component: () => import("../views/userManagement/index.vue"),
+          children: [
+            {
+                path: "/home/userManagement",
+                name: "userManagement",
+                meta: {
+                    title: "账号管理",
+                },
+                component: () => import("../views/userManagement/index.vue"),
+            },
+            {
+                path: "/home/roleManagement",
+                name: "roleManagement",
+                meta: {
+                    title: "角色管理",
+                },
+                component: () => import("../views/userManagement/roleManagement.vue"),
+            },
+          ]
       },
       {
           path: "/home/bookEntries",
@@ -31,7 +48,6 @@ const routes:Array<RouteRecordRaw> = [
           meta: {
               title: "书籍词条",
           },
-          component: () => import("../views/bookEntries/bookManagement.vue"),
           children: [
             {
                 path: "/home/bookManagement",
