@@ -20,8 +20,8 @@
             <span>用户管理</span>
           </template>
           <el-menu-item-group>
-            <template #title>分组一</template>
             <el-menu-item index="/home/userManagement">用户管理</el-menu-item>
+            <el-menu-item index="/home/roleManagement">角色管理</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
         <el-sub-menu index="2">
