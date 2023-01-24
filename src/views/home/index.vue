@@ -61,12 +61,14 @@ import { useRoute } from "vue-router";
 import { ref } from "@vue/reactivity";
 import { loginAPI } from "../../api/login";
 import router from "@/router";
+import store from "@/store";
 const route = useRoute();
 //头部默认选中
 const activeIndex = ref<string>('1');
 //退出
-const goOut = () => {
-  router.push({ path: "/login", query: {} })
+const goOut = async() => {
+  router.push({ path: "/logi n", query: {} })
+  await store.dispatch("clearLoginInfo");
 }
 //侧边菜单默认选中
 const activesIndex = ref<string>('1');
@@ -89,10 +91,6 @@ document.getElementById("router-container")!.style.width="calc(100% - 63px)" ;
 document.getElementById("router-container")!.style.width="calc(100% - 200px)" ;
 }
 }
-
-loginAPI({userPhone:'18804236200',passWord:'123456'}).then((res: any) => {
-     console.log(res, "res");
-});
 
 </script>
 

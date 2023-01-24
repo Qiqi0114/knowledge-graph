@@ -1,0 +1,1 @@
+export const EVENT_LOCAL_LOGOUT = "EVENT_LOCAL_LOGOUT";

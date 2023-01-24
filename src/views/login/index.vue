@@ -29,6 +29,7 @@
 
 <script lang="ts" setup>
 import router from '@/router';
+import store from '@/store';
 import { ElMessage, FormInstance } from 'element-plus';
 import { ref } from 'vue';
 import { reactive } from 'vue-demi';
@@ -39,13 +40,16 @@ const loginForm = reactive({
           passWord: '',
       });
 
-const submitForm = async(loginFormRef:any) => {
+/* const submitForm = async(loginFormRef:any) => {
     const res = await loginAPI({userPhone:'18804236200',passWord:'123456'})
     if(res.data.code == '200'){
         router.push({ path: "/home", query: {} })
     }
+} */
+ const submitForm = async(loginFormRef:any) => {
+  await store.dispatch("appLogin", {
+                    ...loginForm});
 }
-
 </script>
 
 <style lang="scss" scoped>
