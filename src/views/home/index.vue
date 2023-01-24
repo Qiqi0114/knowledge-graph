@@ -67,7 +67,7 @@ const route = useRoute();
 const activeIndex = ref<string>('1');
 //退出
 const goOut = async() => {
-  router.push({ path: "/logi n", query: {} })
+  router.push({ path: "/login", query: {} })
   await store.dispatch("clearLoginInfo");
 }
 //侧边菜单默认选中
