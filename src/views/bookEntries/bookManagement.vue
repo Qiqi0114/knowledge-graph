@@ -40,9 +40,9 @@
                   <el-table-column prop="bookName" label="用户全称" min-width="120" />
                   <el-table-column prop="bookStatic" label="用户状态" min-width="120">
                       <template #default="scope">
-                          <el-button type="text" :disabled="scope.row.bookStatic ? true : false"
-                              @click="updateActivationStatus(scope.row,true)">上架</el-button>
                           <el-button type="text" :disabled="scope.row.bookStatic ? false : true"
+                              @click="updateActivationStatus(scope.row,true)">上架</el-button>
+                          <el-button type="text" :disabled="scope.row.bookStatic ? true : false"
                               @click="updateActivationStatus(scope.row,false)">下架</el-button>
                       </template>
                   </el-table-column>
@@ -162,6 +162,7 @@ try{
           type: "error",
       });
   }
+  await loadUserManagementInfoList();
 }catch(error){}
 loading.value = false;
 }
