@@ -30,10 +30,19 @@
             <span>书籍词条</span>
           </template>
           <el-menu-item-group>
-            <template #title>分组一</template>
             <el-menu-item index="/home/bookManagement">书籍管理</el-menu-item>
             <el-menu-item index="/home/entryManagement">词条服务</el-menu-item>
             <el-menu-item index="/home/relationshipManagement">关系服务</el-menu-item>
+          </el-menu-item-group>
+        </el-sub-menu>
+        <el-sub-menu index="3">
+          <template #title>
+            <i class="el-icon-location"></i>
+            <span>任务服务</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/home/taskManagement">任务管理</el-menu-item>
+            <el-menu-item index="/home/taskAssignmentManagement">任务分配管理</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
       </el-menu>

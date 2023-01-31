@@ -75,6 +75,31 @@ const routes:Array<RouteRecordRaw> = [
           },
           ]
       },
+      {
+        path: "/home/taskService",
+        name: "taskService",
+        meta: {
+            title: "任务服务",
+        },
+        children: [
+          {
+              path: "/home/taskManagement",
+              name: "taskManagement",
+              meta: {
+                  title: "任务管理",
+              },
+              component: () => import("../views/taskService/taskManagement.vue"),
+          },
+          {
+              path: "/home/taskAssignmentManagement",
+              name: "taskAssignmentManagement",
+              meta: {
+                  title: "任务分配管理",
+              },
+              component: () => import("../views/taskService/taskAssignmentManagement.vue"),
+          },
+        ]
+    },
     ]
   },
 /*   {
