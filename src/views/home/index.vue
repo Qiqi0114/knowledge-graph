@@ -32,8 +32,7 @@
           <el-menu-item-group>
             <template #title>分组一</template>
             <el-menu-item index="/home/bookManagement">书籍管理</el-menu-item>
-            <el-menu-item index="/home/entryManagement">词条管理</el-menu-item>
-            <el-menu-item index="/home/relationshipManagement">关系管理</el-menu-item>
+            <el-menu-item index="/home/entryManagement">词条服务</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
       </el-menu>

@@ -65,14 +65,6 @@ const routes:Array<RouteRecordRaw> = [
                 },
                 component: () => import("../views/bookEntries/entryManagement.vue"),
             },
-            {
-              path: "/home/relationshipManagement",
-              name: "relationshipManagement",
-              meta: {
-                  title: "关系管理",
-              },
-              component: () => import("../views/bookEntries/relationshipManagement.vue"),
-          },
           ]
       },
     ]
