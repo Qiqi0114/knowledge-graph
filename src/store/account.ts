@@ -42,11 +42,11 @@ const menu: Module<AccountState, RootState> = {
                   message: '登陆成功',
                   type: 'success',
                 })
-                console.log(sessionStorage.getItem(TOKEN_KEY));
-                
-              }else{
+              }else if(data.code == '500'){
                 await router.push({name: 'login'});
-                ElMessage.error('账号或密码错误')
+                ElMessage.error(data.code.msg)
+              }else{
+                ElMessage.error('登录失败')
               }
             commit("SET_TOKEN", {
                 token: data.data ? data.data : 'test_token',
