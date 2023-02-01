@@ -10,14 +10,7 @@
                                     <el-col :span="6">
                                         <el-form-item label="姓名" prop="userName">
                                             <el-input v-model.userName="searchForm.userName"
-                                                placeholder="请输入姓名" />
-                                        </el-form-item>
-                                    </el-col>
-                                    <el-col :span="12">
-                                        <el-form-item style="float: right;">
-                                            <el-button type="success" @click="selectForm(searchFormRef)">查询</el-button>
-                                            <el-button @click="resetForm()" type="info">重置</el-button>
-                                            <el-button type="primary" @click="dialogAddFormVisible = true">添加</el-button>
+                                               @input="loadUserManagementInfoList()" placeholder="请输入姓名" clearable/>
                                         </el-form-item>
                                     </el-col>
                                 </el-row>
@@ -32,20 +25,20 @@
                     <el-table :data="baseInfoTableData" :border="true" 
                         ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
                         :height="500">
-                        <el-table-column label="操作" min-width="100">
+                        <el-table-column label="操作" fixed="left" min-width="110">
                             <template #default="scope">
-                                <el-button type="text"
+                                <el-button type="primary" link
                                     @click="updateUserManagement(scope.row)">编辑
                                 </el-button>
-                                <el-button type="text" @click="deleteUserManagement(scope.row)">删除</el-button>
+                                <el-button type="danger" link @click="deleteUserManagement(scope.row)">删除</el-button>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="id" label="用户id" min-width="130" />
+                        <el-table-column prop="id" label="用户id" min-width="130" :show-overflow-tooltip="true"/>
                         <el-table-column prop="userName" label="用户全称" min-width="120" />
-                        <el-table-column prop="passWord" label="密码" min-width="120" />
+                        <el-table-column prop="passWord" label="密码" min-width="120" :show-overflow-tooltip="true"/>
                         <el-table-column prop="userSex" label="用户性别" min-width="90" />
-                        <el-table-column prop="userPhone" label="手机号" min-width="120" />
-                        <el-table-column prop="userEmail" label="用户邮箱" min-width="120" />
+                        <el-table-column prop="userPhone" label="手机号" min-width="150" :show-overflow-tooltip="true"/>
+                        <el-table-column prop="userEmail" label="用户邮箱" min-width="180" :show-overflow-tooltip="true"/>
                         <el-table-column prop="userStatic" label="用户状态" min-width="120">
                             <template #default="scope">
                                 <el-button type="text" :disabled="scope.row.userStatic ? false : true"
@@ -54,7 +47,7 @@
                                     @click="updateActivationStatus(scope.row,false)">封禁</el-button>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="roleId" label="角色id" min-width="85"/>
+                        <el-table-column prop="roleId" label="角色id" min-width="85" :show-overflow-tooltip="true"/>
                     </el-table>
                 </div>
                 <!--分页器 start-->
@@ -165,28 +158,7 @@ const searchFormRef = ref<FormInstance>()
 const searchForm = reactive({
      userName:"",
 })
-// 重置查询条件
-const resetForm = () => {
-    //清空查询框数据
-    searchForm.userName = "";
-    //分页器重置为第一页
-    pCurrentPage.value = 1;
-    pPageSize.value = 10;
-    //重新获取数据
-    loadUserManagementInfoList();
-};
-//查询分页列表
-const selectForm = (formEl: FormInstance | undefined) => {
-     if(!formEl) return;
-     formEl.validate((valid) => {
-          if(valid){
-               loadUserManagementInfoList();
-          }else{
-               console.log('error');
-               return false;
-          }
-     })
-}
+
 //添加用户信息对话框开关
 const dialogAddFormVisible = ref<boolean>(false);
 const addForm = reactive({
