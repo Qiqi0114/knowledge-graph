@@ -10,13 +10,7 @@
                               <el-col :span="6">
                                   <el-form-item label="姓名" prop="bookName">
                                       <el-input v-model.bookName="searchForm.bookName"
-                                          placeholder="请输入姓名" />
-                                  </el-form-item>
-                              </el-col>
-                              <el-col :span="12">
-                                  <el-form-item style="float: right;">
-                                      <el-button type="success" @click="selectForm(searchFormRef)">查询</el-button>
-                                      <el-button @click="resetForm()" type="info">重置</el-button>
+                                        @input="loadBookManagementInfoList()" placeholder="请输入姓名" clearable/>
                                   </el-form-item>
                               </el-col>
                           </el-row>
@@ -31,9 +25,9 @@
               <el-table :data="baseInfoTableData" :border="true" 
                   ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
                   :height="500">
-                  <el-table-column label="操作" min-width="100">
+                  <el-table-column label="操作" min-width="30">
                       <template #default="scope">
-                          <el-button type="text" @click="deleteUserManagement(scope.row)">删除</el-button>
+                          <el-button type="danger" link @click="deleteUserManagement(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
                   <el-table-column prop="id" label="用户id" min-width="130" />
@@ -81,39 +75,17 @@ const pDisabled = ref(false);
 const pBackground = ref(false);
 const handleSizeChange = (val: number) => {
 pPageSize.value = val;
-loadUserManagementInfoList();
+loadBookManagementInfoList();
 };
 const handleCurrentChange = (val: number) => {
 pCurrentPage.value = val;
-loadUserManagementInfoList();
+loadBookManagementInfoList();
 };
 const searchFormRef = ref<FormInstance>()
 //查询参数
 const searchForm = reactive({
 bookName:"",
 })
-// 重置查询条件
-const resetForm = () => {
-//清空查询框数据
-searchForm.bookName = "";
-//分页器重置为第一页
-pCurrentPage.value = 1;
-pPageSize.value = 10;
-//重新获取数据
-loadUserManagementInfoList();
-};
-//查询分页列表
-const selectForm = (formEl: FormInstance | undefined) => {
-if(!formEl) return;
-formEl.validate((valid) => {
-    if(valid){
-         loadUserManagementInfoList();
-    }else{
-         console.log('error');
-         return false;
-    }
-})
-}
 
 //删除用户信息
 const deleteUserManagement = async(row:any) => {
@@ -132,7 +104,7 @@ ElMessageBox.confirm("确认删除?", {
               duration: 1500,
               type: "success",
           });
-          loadUserManagementInfoList();
+          loadBookManagementInfoList();
       } else {
           ElMessage.error(res.data.msg)
       }
@@ -162,12 +134,12 @@ try{
           type: "error",
       });
   }
-  await loadUserManagementInfoList();
+  await loadBookManagementInfoList();
 }catch(error){}
 loading.value = false;
 }
 //获取列表
-const loadUserManagementInfoList = async () => {
+const loadBookManagementInfoList = async () => {
 loading.value = true;
 try{
     const res = await BookManagementAPI({
@@ -186,7 +158,7 @@ loading.value = false;
 
 
 onMounted(() => {
-loadUserManagementInfoList();
+loadBookManagementInfoList();
 })
 </script>
 

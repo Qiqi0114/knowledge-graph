@@ -10,18 +10,10 @@
                               <el-col :span="6">
                                   <el-form-item label="角色名称" prop="roleName">
                                       <el-input v-model.roleName="searchForm.roleName"
-                                          placeholder="请输入名称" />
-                                  </el-form-item>
-                              </el-col>
-                              <el-col :span="12">
-                                  <el-form-item style="float: right;">
-                                      <el-button type="success" @click="selectForm(searchFormRef)">查询</el-button>
-                                      <el-button @click="resetForm()" type="info">重置</el-button>
-                                      <el-button type="primary" @click="dialogAddFormVisible = true">添加</el-button>
+                                         @input="loadRoleByPageInfoList()" placeholder="请输入名称" clearable/>
                                   </el-form-item>
                               </el-col>
                           </el-row>
-
                       </el-form>
                   </el-col>
               </el-row>
@@ -32,12 +24,12 @@
               <el-table :data="baseInfoTableData" :border="true" 
                   ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
                   :height="500">
-                  <el-table-column label="操作" min-width="100">
+                  <el-table-column label="操作" min-width="40">
                       <template #default="scope">
-                          <el-button type="text"
+                          <el-button type="success" link
                               @click="rolePutUserList(scope.row)">添加用户
                           </el-button>
-                          <el-button type="text" @click="deleteRoleManagement(scope.row)">删除</el-button>
+                          <el-button type="danger" link @click="deleteRoleManagement(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
                   <el-table-column prop="id" label="角色id" min-width="130" />
@@ -132,28 +124,7 @@ const searchFormRef = ref<FormInstance>()
 const searchForm = reactive({
     roleName:"",
 })
-// 重置查询条件
-const resetForm = () => {
-//清空查询框数据
-searchForm.roleName = "";
-//分页器重置为第一页
-pCurrentPage.value = 1;
-pPageSize.value = 10;
-//重新获取数据
-loadRoleByPageInfoList();
-};
-//查询分页列表
-const selectForm = (formEl: FormInstance | undefined) => {
-if(!formEl) return;
-formEl.validate((valid) => {
-    if(valid){
-         loadRoleByPageInfoList();
-    }else{
-         console.log('error');
-         return false;
-    }
-})
-}
+
 //添加角色信息对话框开关
 const dialogAddFormVisible = ref<boolean>(false);
 const addForm = reactive({
