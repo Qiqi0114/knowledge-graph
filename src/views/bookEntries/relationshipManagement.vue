@@ -13,9 +13,9 @@
                                         @input="loadRelationshipList()"  placeholder="请输入姓名" clearable/>
                                   </el-form-item>
                               </el-col>
-                              <el-col :span="12">
+                              <el-col :span="4">
                                   <el-form-item style="float: right;">
-                                      <el-button type="primary" @click="dialogAddFormVisible = true">添加</el-button>
+                                      <el-button type="primary" @click="dialogAddFormVisible = true">添加关系</el-button>
                                   </el-form-item>
                               </el-col>
                           </el-row>
@@ -30,12 +30,11 @@
               <el-table :data="baseInfoTableData" :border="true" 
                   ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
                   :height="500">
-                  <el-table-column label="操作" min-width="100">
+                  <el-table-column label="操作" min-width="30">
                       <template #default="scope">
-                          <el-button type="text"
-                              @click="updaterelationshipManagement(scope.row)">编辑
+                          <el-button type="primary" link @click="updaterelationshipManagement(scope.row)">编辑
                           </el-button>
-                          <el-button type="text" @click="deleteRelationship(scope.row)">删除</el-button>
+                          <el-button type="danger" link @click="deleteRelationship(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
                   <el-table-column prop="id" label="关系id" min-width="130" />
