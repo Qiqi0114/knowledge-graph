@@ -1,5 +1,53 @@
 import request from "../utils/request"
 
+//分页条件查询任务列表
+export function getTakeListByPageAPI(
+  param: {
+    //分页参数
+    pageNum:number,
+    pageSize:number,
+    //创建时间
+    taskCreateTime:string,
+    //结束时间
+    taskLoadTime:string,
+    //书籍名称
+    bookName:string,
+    //角色名称
+    userName:string,
+  }) {
+  return request({
+    url: '/service_book/server/task/takeListByPage',
+    method: 'post',
+    data:param
+  })
+}
+//删除任务
+export function deleteTaskAPI(
+  param:{
+      //任务id
+      id:string,
+  }) {
+  return request({
+    url: '/service_book/server/task/deleteTask',
+    method: 'delete',
+    params:param
+  })
+}
+//任务延长
+export function prolongTaskAPI(
+    param: {
+      //id
+      id:string,
+      //延长时间
+      taskLoadTime:string,
+    }) {
+    return request({
+      url: '/service_book/server/task/prolongTask',
+      method: 'post',
+      data:param
+    })
+  }
+  
 //获取单个用户的任务
 export function getTaskUserByIdAPI(
     param: {

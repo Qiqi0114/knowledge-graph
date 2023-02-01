@@ -44,8 +44,7 @@
                         </el-table-column>
                         <el-table-column prop="roleId" label="角色id" min-width="120" :show-overflow-tooltip="true"/>
                     </el-table>
-                </div>
-                <!--分页器 start-->
+                                    <!--分页器 start-->
                 <div class="flex pagination-bg">
                     <el-pagination v-model:currentPage="pCurrentPage" v-model:page-size="pPageSize"
                         :page-sizes="[10, 20]" :small="pSmall" :disabled="pDisabled" :background="pBackground"
@@ -53,6 +52,8 @@
                         @current-change="handleCurrentChange" />
                 </div>
                 <!--分页器 end-->
+                </div>
+
 
                 <!-- 查看任务对话框 -->
                 <el-dialog title="分配任务" v-model="dialogFormVisible">
@@ -86,15 +87,15 @@
                                 <el-form-item label="任务创建、结束时间">
                                     <el-date-picker
                                         v-model="value1"
-                                        type="daterange"
+                                        type="datetimerange"
                                         range-separator="To"
                                         start-placeholder="任务创建时间"
                                         end-placeholder="任务结束时间"
                                         :size="size"
-                                        format="YYYY/MM/DD"
-                                        value-format="YYYY-MM-DD"
+                                        format="YYYY/MM/DD HH:mm:ss"
+                                        value-format="YYYY-MM-DD HH:mm:ss"
                                     />
-                        </el-form-item>
+                                </el-form-item>
                             </el-col>
                         </el-row>
                         <el-row>
