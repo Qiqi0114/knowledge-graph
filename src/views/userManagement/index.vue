@@ -13,6 +13,11 @@
                                                @input="loadUserManagementInfoList()" placeholder="请输入姓名" clearable/>
                                         </el-form-item>
                                     </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item style="float: right;">
+                                            <el-button type="primary" @click="addUserManagement()">添加</el-button>
+                                        </el-form-item>
+                                    </el-col>
                                 </el-row>
 
                             </el-form>
@@ -41,13 +46,13 @@
                         <el-table-column prop="userEmail" label="用户邮箱" min-width="180" :show-overflow-tooltip="true"/>
                         <el-table-column prop="userStatic" label="用户状态" min-width="120">
                             <template #default="scope">
-                                <el-button type="text" :disabled="scope.row.userStatic ? false : true"
-                                    @click="updateActivationStatus(scope.row,true)">激活</el-button>
                                 <el-button type="text" :disabled="scope.row.userStatic ? true : false"
+                                    @click="updateActivationStatus(scope.row,true)">激活</el-button>
+                                <el-button type="text" :disabled="scope.row.userStatic ? false : true"
                                     @click="updateActivationStatus(scope.row,false)">封禁</el-button>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="roleId" label="角色id" min-width="85" :show-overflow-tooltip="true"/>
+                        <el-table-column prop="roleId" v-if="false" label="角色id" min-width="85" :show-overflow-tooltip="true"/>
                     </el-table>
                 </div>
                 <!--分页器 start-->
@@ -159,6 +164,10 @@ const searchForm = reactive({
      userName:"",
 })
 
+//添加用户信息
+const addUserManagement = async() =>{
+    dialogAddFormVisible.value = true;
+}
 //添加用户信息对话框开关
 const dialogAddFormVisible = ref<boolean>(false);
 const addForm = reactive({
@@ -199,6 +208,7 @@ const addConfirm = async() =>{
         console.log('error');
     }
     dialogAddFormVisible.value = false;
+    await loadUserManagementInfoList()
 }
 //修改用户信息对话框开关
 const dialogFormVisible = ref<boolean>(false);
