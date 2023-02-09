@@ -13,6 +13,11 @@
                                          @input="loadRoleByPageInfoList()" placeholder="请输入名称" clearable/>
                                   </el-form-item>
                               </el-col>
+                              <el-col :span="12">
+                                  <el-form-item style="float: right;">
+                                      <el-button type="primary" @click="addAddRole()">添加用户组</el-button>
+                                  </el-form-item>
+                              </el-col>
                           </el-row>
                       </el-form>
                   </el-col>
@@ -62,10 +67,9 @@
           </el-dialog>
           <!-- 角色下添加用户对话框 -->
           <el-dialog title="角色下添加用户" v-model="dialogFormVisible">
+                <el-button type="primary" @click="adduserManagement()">添加用户</el-button>
                 <el-table highlight-current-row :data="addRolePutUserTable" height="300"
-                    :header-cell-style="{ background: '#F5F6FA' }"
-                    @selection-change="handleSelectionChange">
-                    <el-table-column type="selection" width="55"> </el-table-column>
+                    :header-cell-style="{ background: '#F5F6FA' }">
                     <el-table-column prop="id" label="用户id" min-width="130" />
                         <el-table-column prop="userName" label="用户全称" min-width="120" />
                         <el-table-column prop="passWord" label="密码" min-width="120" />
@@ -80,21 +84,44 @@
                         </el-table-column>
                         <el-table-column prop="roleId" label="角色id" min-width="85"/>
                 </el-table>
-              <template #footer>
-                  <span class="dialog-footer">
-                  <el-button @click="dialogFormVisible = false">取 消</el-button>
-                  <el-button type="primary" @click="rolePutUserConfirm()"
-                      >确 定</el-button
-                  >
-                  </span>
-              </template>
           </el-dialog>
+                    <!-- 角色下添加用户对话框 -->
+                    <el-dialog title="角色下添加用户" v-model="dialoguserVisible">
+                        <el-table :data="userTableData" :border="true" 
+                            ref="userTableDataRef" v-loading="loadingUser" :header-cell-style="{ background: '#F5F6FA' }"
+                            :height="500" @selection-change="handleSelectionChange1" >
+                            <el-table-column type="selection" width="55" />
+                            <el-table-column prop="id" v-if="false" label="用户id" min-width="200" />
+                            <el-table-column prop="userName" label="用户全称" min-width="120" />
+                            <el-table-column prop="userAccount" label="用户账号" min-width="120" :show-overflow-tooltip="true" />
+                            <el-table-column prop="passWord" label="密码" min-width="120" :show-overflow-tooltip="true"/>
+                            <el-table-column prop="departmentName" label="系" min-width="140" />
+                            <el-table-column prop="userPhone" label="手机号" min-width="130" />
+                            <el-table-column prop="userEmail" label="用户邮箱" min-width="180" />
+                            <el-table-column prop="userSex" label="性别" min-width="130">
+                                <template #default="scope">
+                                    <span v-if="scope.row.userSex === 1">女</span>
+                                    <span v-if="scope.row.userSex === 0">男</span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="roleName" label="角色" min-width="100"/>
+                        </el-table>
+                        <template #footer>
+                            <span class="dialog-footer">
+                            <el-button @click="dialoguserVisible = false">取 消</el-button>
+                            <el-button type="primary" @click="rolePutUserConfirm()"
+                                >确 定</el-button
+                            >
+                            </span>
+                        </template>
+                    </el-dialog> 
       </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { addRoleManagementAPI, addRolePutUserListAPI, deleteRoleManagementAPI, getRoleByPageAPI, getRoleListByUserIdAPI } from "@/api/roleManagement";
+import { getUserListNoPageAPI, UserManagementAPI } from "@/api/userManagement";
 import { reactive } from "@vue/reactivity";
 import { ElMessage, ElMessageBox, FormInstance } from "element-plus";
 import { onMounted, ref } from "vue";
@@ -119,6 +146,8 @@ const handleCurrentChange = (val: number) => {
 pCurrentPage.value = val;
 loadRoleByPageInfoList();
 };
+
+
 const searchFormRef = ref<FormInstance>()
 //查询参数
 const searchForm = reactive({
@@ -132,6 +161,71 @@ userForm:{
     roleName:'',
 }
 });
+//添加用户组
+const addAddRole = async() =>{
+    dialogAddFormVisible.value = true;
+}
+
+//角色下添加用户对话框开关
+const dialogFormVisible = ref<boolean>(false);
+//用户列表绑定
+const addRolePutUserTable = ref([]);
+//声明类型
+interface User {
+    id:'',
+    userName:'',
+    userSex:'',
+    userPhone:'',
+    userEmail:'',
+    userStatic:false,
+    roleId:'',
+}
+
+//添加角色下用户对话框开关
+const dialoguserVisible = ref<boolean>(false);
+//查看用户
+const adduserManagement = async() =>{
+    dialoguserVisible.value = true;
+    await loadUserListNoPageInfoList();
+}
+
+//定义添加用户的角色id
+const userId = ref<string>('');
+//角色下添加用户
+const rolePutUserList = async(row:any) =>{
+dialogFormVisible.value = true;
+userId.value = row.id;
+await loadRoleListByUserId(row.id)
+}
+//选中用户绑定
+const addUserIdTable = ref<User[]>([]);
+//表格勾选事件
+const handleSelectionChange1 = (val: User[]) => {
+    addUserIdTable.value = val;
+}
+//确认角色下添加用户
+const rolePutUserConfirm = async() =>{
+await rolePutUserListById()
+dialoguserVisible.value = false;
+await loadRoleListByUserId(userId.value)
+}
+//用户列表加载
+const loadingUser = ref<boolean>(false)
+//用户table赋值
+const userTableData = ref([]);
+
+//获取用户列表
+const loadUserListNoPageInfoList = async () => {
+loadingUser.value = true;
+try{
+    const res = await getUserListNoPageAPI()
+    userTableData.value = res.data.data;
+}catch(error){
+    console.log('error');
+}
+loadingUser.value = false;
+}
+
 //添加角色
 const addConfirm = async() =>{
 try{
@@ -158,41 +252,7 @@ try{
 dialogAddFormVisible.value = false;
 await loadRoleByPageInfoList()
 }
-//角色下添加用户对话框开关
-const dialogFormVisible = ref<boolean>(false);
-//用户列表绑定
-const addRolePutUserTable = ref([]);
-//声明类型
-interface User {
-    id:'',
-    userName:'',
-    userSex:'',
-    userPhone:'',
-    userEmail:'',
-    userStatic:false,
-    roleId:'',
-}
-//选中用户绑定
-const addUserIdTable = ref<User[]>([]);
-//表格勾选事件
-const handleSelectionChange = (val: User[]) => {
-    addUserIdTable.value = val;
-}
-//定义添加用户的角色id
-const userId = ref<string>('');
-//角色下添加用户
-const rolePutUserList = async(row:any) =>{
-dialogFormVisible.value = true;
-userId.value = row.id;
-await loadRoleListByUserId(row.id)
-}
 
-//确认角色下添加用户
-const rolePutUserConfirm = async() =>{
-await rolePutUserListById()
-dialogFormVisible.value = false;
-await loadRoleByPageInfoList()
-}
 //删除角色
 const deleteRoleManagement = async(row:any) => {
 ElMessageBox.confirm("确认删除?", {
@@ -219,7 +279,7 @@ ElMessageBox.confirm("确认删除?", {
   .catch(() => {console.log('erroe');});
 }
 
-//获取列表
+//获取角色列表
 const loadRoleByPageInfoList = async () => {
 loading.value = true;
 try{
@@ -276,7 +336,7 @@ try{
 }catch(error){
   console.log('error');
 }
-userId.value = '';
+selectUserIdList.value = [];
 }
 onMounted(() => {
 loadRoleByPageInfoList();
