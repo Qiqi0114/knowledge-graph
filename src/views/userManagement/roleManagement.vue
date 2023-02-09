@@ -32,7 +32,7 @@
                           <el-button type="danger" link @click="deleteRoleManagement(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
-                  <el-table-column prop="id" label="角色id" min-width="130" />
+                  <el-table-column prop="id" v-if="false" label="角色id" min-width="130" />
                   <el-table-column prop="roleName" label="角色名称" min-width="120" />
               </el-table>
           </div>

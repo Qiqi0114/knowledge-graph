@@ -30,9 +30,9 @@
                           <el-button type="danger" link @click="deleteUserManagement(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
-                  <el-table-column prop="id" label="用户id" min-width="130" />
-                  <el-table-column prop="bookName" label="用户全称" min-width="120" />
-                  <el-table-column prop="bookStatic" label="用户状态" min-width="120">
+                  <el-table-column prop="id" label="书籍id" min-width="130" />
+                  <el-table-column prop="bookName" label="书籍全称" min-width="120" />
+                  <el-table-column prop="bookStatic" label="书籍状态" min-width="120">
                       <template #default="scope">
                           <el-button type="text" :disabled="scope.row.bookStatic ? false : true"
                               @click="updateActivationStatus(scope.row,true)">上架</el-button>
@@ -87,7 +87,7 @@ const searchForm = reactive({
 bookName:"",
 })
 
-//删除用户信息
+//删除书籍信息
 const deleteUserManagement = async(row:any) => {
 ElMessageBox.confirm("确认删除?", {
   confirmButtonText: "是",

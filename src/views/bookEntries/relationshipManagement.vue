@@ -37,8 +37,8 @@
                           <el-button type="danger" link @click="deleteRelationship(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
-                  <el-table-column prop="id" label="关系id" min-width="130" />
-                  <el-table-column prop="relationshipName" label="词条id" min-width="120" />
+                  <el-table-column prop="id" v-if="false" label="关系id" min-width="130" />
+                  <el-table-column prop="relationshipName" label="关系名称" min-width="120" />
               </el-table>
           </div>
           <!--分页器 start-->

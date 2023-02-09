@@ -77,6 +77,11 @@
                     <el-form :model="updateForm">
                         <el-row>
                             <el-col :span="24">
+                                &nbsp;
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="24">
                                 <el-form-item label="用户id">
                                     <el-input v-model="updateForm.assignForm.userId" style="width:250px"></el-input>
                                 </el-form-item>
@@ -122,7 +127,7 @@
                         <span class="dialog-footer">
                         <el-button @click="dialogFormVisible = false">取 消</el-button>
                         <el-button type="primary" @click="updateConfirm()"
-                            >确 定</el-button
+                            >确认分配</el-button
                         >
                         </span>
                     </template>
