@@ -39,14 +39,12 @@ const menu: Module<AccountState, RootState> = {
             if(data.code == '200'){
                 router.push({ path: "/home", query: {} })
                 ElMessage.success({
-                  message: '登陆成功',
+                  message: data.msg,
                   type: 'success',
                 })
-              }else if(data.code == '500'){
+              }else {
                 await router.push({name: 'login'});
-                ElMessage.error(data.code.msg)
-              }else{
-                ElMessage.error('登录失败')
+                ElMessage.error(data.msg)
               }
             commit("SET_TOKEN", {
                 token: data.data ? data.data : 'test_token',
