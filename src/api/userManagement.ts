@@ -93,3 +93,10 @@ export function getUserActivationStatusAPI(
     params:param
   })
 }
+//获取用户列表 无分页 无条件
+export function getUserListNoPageAPI() {
+  return request({
+    url: '/user_service/server/user/userListNoPage',
+    method: 'get',
+  })
+}
