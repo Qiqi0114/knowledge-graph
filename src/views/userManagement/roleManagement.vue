@@ -15,7 +15,7 @@
                               </el-col>
                               <el-col :span="12">
                                   <el-form-item style="float: right;">
-                                      <el-button type="primary" @click="addAddRole()">添加用户组</el-button>
+                                      <el-button type="primary" @click="addAddRole()">添加角色</el-button>
                                   </el-form-item>
                               </el-col>
                           </el-row>
@@ -68,6 +68,7 @@
           <!-- 角色下添加用户对话框 -->
           <el-dialog title="角色下添加用户" v-model="dialogFormVisible">
                 <el-button type="primary" @click="adduserManagement()">添加用户</el-button>
+                <el-button type="danger" @click="deluserManagement()">清空用户</el-button>
                 <el-table highlight-current-row :data="addRolePutUserTable" height="300"
                     :header-cell-style="{ background: '#F5F6FA' }">
                     <el-table-column prop="id" label="用户id" min-width="130" />
@@ -183,12 +184,17 @@ interface User {
 
 //添加角色下用户对话框开关
 const dialoguserVisible = ref<boolean>(false);
-//查看用户
-const adduserManagement = async() =>{
+//添加用户
+const adduserManagement = async() => {
     dialoguserVisible.value = true;
     await loadUserListNoPageInfoList();
 }
-
+//清空用户
+const deluserManagement = async() => {
+    addUserIdTable.value = []
+    await rolePutUserListById()
+    await loadRoleListByUserId(userId.value)
+}
 //定义添加用户的角色id
 const userId = ref<string>('');
 //角色下添加用户
