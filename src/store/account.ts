@@ -34,8 +34,7 @@ const menu: Module<AccountState, RootState> = {
             const userPhone = payload.userPhone.trim();
             const passWord = payload.passWord;
             const type = payload.type;
-            const {data} = await loginAPI({userPhone, passWord});
-            console.log(data.data);            
+            const {data} = await loginAPI({userPhone, passWord});        
             if(data.code == '200'){
                 router.push({ path: "/home", query: {} })
                 ElMessage.success({

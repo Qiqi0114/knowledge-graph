@@ -256,7 +256,7 @@ const deleteUserManagement = async(row:any) => {
             }
             loading.value = false;
         })
-        .catch(() => {console.log('erroe');});
+        .catch(() => {console.log('error');});
 }
 //激活封禁用户状态 getUserActivationStatusAPI
 const updateActivationStatus = async(row:any,type:boolean) => {
@@ -293,7 +293,6 @@ const loadUserManagementInfoList = async () => {
                pageSize:pPageSize.value,
                userName:searchForm.userName
           })
-          console.log(res.data.data.records);
           baseInfoTableData.value = res.data.data.records;
           pTotal.value = res.data.data.total;
      }catch(error){

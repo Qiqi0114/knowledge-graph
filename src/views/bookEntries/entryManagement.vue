@@ -126,7 +126,7 @@ ElMessageBox.confirm("确认删除?", {
       }
       loading.value = false;
   })
-  .catch(() => {console.log('erroe');});
+  .catch(() => {console.log('error');});
 }
 
 //查看关系树弹窗开关
@@ -154,8 +154,6 @@ try{
   })
   if (res.data.code == 200) {
     InfoTreeTableData.value = res.data.data;
-    console.log( InfoTreeTableData.value );
-    
   } else {
       //失败
       ElMessage({

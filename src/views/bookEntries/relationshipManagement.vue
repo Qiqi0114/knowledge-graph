@@ -199,7 +199,7 @@ ElMessageBox.confirm("确认删除?", {
       }
       loading.value = false;
   })
-  .catch(() => {console.log('erroe');});
+  .catch(() => {console.log('error');});
 }
 
 //获取列表

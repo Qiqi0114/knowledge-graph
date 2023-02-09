@@ -147,7 +147,6 @@ try{
          pageSize:pPageSize.value,
          bookName:searchForm.bookName
     })
-    console.log(res.data.data.records);
     baseInfoTableData.value = res.data.data.records;
     pTotal.value = res.data.data.total;
 }catch(error){
