@@ -10,13 +10,13 @@
         text-color="#fff"
         router
         :collapse="isCollapse"
-        :default-active="activesIndex"
+        :default-active="1"
         @open="handleOpen"
         @close="handleClose"
       >
         <el-sub-menu index="1">
           <template #title>
-            <i class="el-icon-location"></i>
+            <el-icon><Avatar /></el-icon>
             <span>用户管理</span>
           </template>
           <el-menu-item-group>
@@ -26,7 +26,7 @@
         </el-sub-menu>
         <el-sub-menu index="2">
           <template #title>
-            <i class="el-icon-location"></i>
+            <el-icon><Reading /></el-icon>
             <span>书籍词条</span>
           </template>
           <el-menu-item-group>
@@ -37,7 +37,7 @@
         </el-sub-menu>
         <el-sub-menu index="3">
           <template #title>
-            <i class="el-icon-location"></i>
+            <el-icon><List /></el-icon>
             <span>任务服务</span>
           </template>
           <el-menu-item-group>
@@ -69,6 +69,7 @@
 <script lang="ts" setup>
 import { useRoute } from "vue-router";
 import { ref } from "@vue/reactivity";
+import { Avatar, Reading, List } from '@element-plus/icons-vue'
 import { loginAPI } from "../../api/login";
 import router from "@/router";
 import store from "@/store";
