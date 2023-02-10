@@ -70,7 +70,7 @@
                             <template #default="scope">
                                 <span v-if="scope.row.staticZ === 1">未完成</span>
                                 <span v-if="scope.row.staticZ === 2">已完成</span>
-                                <span v-if="scope.row.staticZ === 3">超市</span>
+                                <span v-if="scope.row.staticZ === 3">超时</span>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -81,7 +81,12 @@
                             </el-col>
                         </el-row>
                         <el-row>
-                            <el-col :span="24">
+                            <el-col :span="12">
+                                <el-form-item label="用户名称">
+                                    <el-input v-model="updateForm.assignForm.userName" :disabled="true" style="width:250px"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12" v-if="false">
                                 <el-form-item label="用户id">
                                     <el-input v-model="updateForm.assignForm.userId" style="width:250px"></el-input>
                                 </el-form-item>
@@ -111,14 +116,24 @@
                             </el-col>
                         </el-row>
                         <el-row>
-                            <el-col :span="12">
+                            <el-col :span="12" v-if="false">
                                 <el-form-item label="书籍id">
-                                    <el-input v-model="updateForm.assignForm.bookId" style="width:250px"></el-input>
+                                    <el-input v-model="updateForm.assignForm.bookId"  style="width:250px"></el-input>
                                 </el-form-item>
                             </el-col>
                             <el-col :span="12">
+                                <el-form-item label="书籍名称">
+                                    <el-input v-model="updateForm.assignForm.bookName"  :disabled="true" style="width:250px"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12" v-if="false" >
                                 <el-form-item label="章节id">
                                     <el-input v-model="updateForm.assignForm.directoryId" style="width:250px"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="章节名称">
+                                    <el-input v-model="updateForm.assignForm.directoryName" :disabled="true" style="width:250px"></el-input>
                                 </el-form-item>
                             </el-col>
                         </el-row>
@@ -208,10 +223,16 @@ const updateForm = reactive({
       taskLoadTime:'',
       //用户id
       userId:'',
+      //用户名称
+      userName:'',
       //书籍id
       bookId:'',
+      //书籍名称
+      bookName:'',
       //章节id
       directoryId:'',
+      //章节名称
+      directoryName:'',
     }
 });
 //时间赋值
@@ -223,11 +244,17 @@ const seeTask = async(row:any) =>{
     updateForm.assignForm.taskCreateTime = '';
     updateForm.assignForm.taskLoadTime = '';
     updateForm.assignForm.userId = '';
+    updateForm.assignForm.userName = '';
     updateForm.assignForm.bookId = '';
+    updateForm.assignForm.bookName = '';
     updateForm.assignForm.directoryId = '';
+    updateForm.assignForm.directoryName = '';
+    bookId.value = '';
+    bookName.value = '';
     value1.value = '';
     await loadTaskUserById(row.id)
     updateForm.assignForm.userId = row.id;
+    updateForm.assignForm.userName = row.userName;
 }
 //书籍赋值
 const bookTableData = ref<any[]>([]);
@@ -254,11 +281,13 @@ const directoryTableData = ref<any[]>([]);
 const dialogdirectoryVisible = ref<boolean>(false);
 //  taskCreateTime taskLoadTime bookId 参数令名
 const bookId = ref<string>('');
+const bookName = ref<string>('');
 //选中某行事件
 const seeDirectoryList = async(row:any) => {
     dialogdirectoryVisible.value = true;
     await loadDirectoryList(row);
     bookId.value = row.id;
+    bookName.value = row.bookName;
 }
 //获取章节列表
 const loadDirectoryList = async(row:any) => {
@@ -282,7 +311,9 @@ const directoryConfirm = async(row:any) => {
     })
         .then(async () => {
             updateForm.assignForm.bookId = bookId.value;
+            updateForm.assignForm.bookName = bookName.value;
             updateForm.assignForm.directoryId = row.id;
+            updateForm.assignForm.directoryName = row.directoryName;
             dialogdirectoryVisible.value = false;
             dialogbookVisible.value = false;
         })
