@@ -47,9 +47,9 @@
                         <el-table-column prop="userStatic" label="用户状态" min-width="120">
                             <template #default="scope">
                                 <el-button type="text" :disabled="scope.row.userStatic ? true : false"
-                                    @click="updateActivationStatus(scope.row,true)">激活</el-button>
+                                    @click="updateActivationStatus(scope.row,false)">激活</el-button>
                                 <el-button type="text" :disabled="scope.row.userStatic ? false : true"
-                                    @click="updateActivationStatus(scope.row,false)">封禁</el-button>
+                                    @click="updateActivationStatus(scope.row,true)">封禁</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column prop="roleId" v-if="false" label="角色id" min-width="85" :show-overflow-tooltip="true"/>
