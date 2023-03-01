@@ -4,8 +4,6 @@ import Cookies from "js-cookie";
 import { EVENT_LOCAL_LOGOUT } from "../constant/events"; */
 
 export const TOKEN_KEY = "token";
-export const REMEMBER_KEY = "ZG_OA_REMEMBER_KEY";
-export const REMEMBER_USERNAME_KEY = "ZG_OA_REMEMBER_USERNAME_KEY";
 
 export const setToken = (token?: string) => {
   if (token != null) {
