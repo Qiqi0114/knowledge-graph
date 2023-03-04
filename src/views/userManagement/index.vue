@@ -29,7 +29,7 @@
                 <div class="table-bg" ref="tableContainer" style="width: 99%;">
                     <el-table :data="baseInfoTableData" :border="true" 
                         ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
-                        :height="500">
+                        :height="450">
                         <el-table-column label="操作" fixed="left" min-width="110">
                             <template #default="scope">
                                 <el-button type="primary" link
@@ -347,5 +347,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-
+@import "../../style/public.scss";
 </style>

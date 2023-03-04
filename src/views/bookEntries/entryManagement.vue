@@ -24,19 +24,19 @@
           <div class="table-bg" ref="tableContainer" style="width: 99%;">
               <el-table :data="baseInfoTableData" :border="true" 
                   ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
-                  :height="500">
+                  :height="450">
                   <el-table-column fixed="left" label="操作" min-width="70">
                       <template #default="scope">
                           <el-button type="danger" link @click="deleteEntry(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
-                  <el-table-column prop="id" label="用户id" min-width="130" />
+                  <el-table-column prop="id" label="用户id" min-width="130" :show-overflow-tooltip="true"/>
                   <el-table-column prop="entryName" label="词条名称" min-width="120" />
                   <el-table-column prop="entryText" label="词条角色" min-width="120" />
                   <el-table-column prop="userName" label="创建人" min-width="120" />
-                  <el-table-column prop="entryTime" label="创建时间" min-width="120" />
+                  <el-table-column prop="entryTime" label="创建时间" min-width="120" :show-overflow-tooltip="true"/>
                   <el-table-column prop="bookName" label="来源书籍" min-width="200" :show-overflow-tooltip="true"/>
-                  <el-table-column prop="parentId" label="父id" min-width="120" />
+                  <el-table-column prop="parentId" label="父id" min-width="120" :show-overflow-tooltip="true"/>
                   <el-table-column prop="relationshipName" label="关系" min-width="120" />
                   <el-table-column fixed="right" label="关系树" min-width="120">
                       <template #default="scope">
@@ -58,11 +58,11 @@
                     <el-table :data="InfoTreeTableData" :border="true" ref="InfoTreeTableDataRef" v-loading="loading" 
                   :header-cell-style="{ background: '#F5F6FA' }" :height="300"
                   row-key="id" lazy  default-expand-all :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-                        <el-table-column prop="id" label="用户id" min-width="130" />
+                        <el-table-column prop="id" label="用户id" min-width="130" :show-overflow-tooltip="true"/>
                         <el-table-column prop="entryName" label="词条名称" min-width="120" />
                         <el-table-column prop="entryText" label="词条角色" min-width="120" />
-                        <el-table-column prop="entryTime" label="创建时间" min-width="120" />
-                        <el-table-column prop="parentId" label="父id" min-width="120" />
+                        <el-table-column prop="entryTime" label="创建时间" min-width="120" :show-overflow-tooltip="true"/>
+                        <el-table-column prop="parentId" label="父id" min-width="120" :show-overflow-tooltip="true"/>
                         <el-table-column prop="relationshipId" label="关系" min-width="120" />
                     </el-table>
                 </el-dialog>
@@ -189,5 +189,5 @@ loadEntryListPage();
 </script>
 
 <style lang="scss" scoped>
-
+@import "../../style/public.scss";
 </style>

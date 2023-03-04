@@ -45,6 +45,14 @@
             <el-menu-item index="/home/taskAssignmentManagement">任务分配管理</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
+        <div class="collapse-bg">
+            <el-icon v-if="isCollapse" @click="test" color="#fff" :size="20">
+            <arrow-right-bold color="#fff" />
+          </el-icon>
+          <el-icon v-else @click="test" color="#fff" :size="20" style="float:left">
+            <arrow-left-bold  />
+          </el-icon>
+          </div>
       </el-menu>
       </el-scrollbar>
   </div>
@@ -69,6 +77,10 @@
 <script lang="ts" setup>
 import { useRoute } from "vue-router";
 import { ref } from "@vue/reactivity";
+import {
+  ArrowLeftBold,
+  ArrowRightBold,
+} from '@element-plus/icons-vue';
 import { Avatar, Reading, List } from '@element-plus/icons-vue'
 import { loginAPI } from "../../api/login";
 import router from "@/router";
@@ -95,17 +107,19 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 
 const test =()=>{
-isCollapse.value = !isCollapse.value;
+  isCollapse.value = !isCollapse.value;
 if (isCollapse.value===true){
-document.getElementById("router-container")!.style.width="calc(100% - 63px)" ;
+  document.getElementById("router-container")!.style.width="calc(1150px + 120px)" ;
+  document.getElementById("router-container")!.style.left="80px" ;
 }else{
-document.getElementById("router-container")!.style.width="calc(100% - 200px)" ;
+  document.getElementById("router-container")!.style.width="calc(1150px)" ;
+  document.getElementById("router-container")!.style.left="200px" ;
 }
 }
-
 </script>
 
 <style lang="scss" scoped>
+@import "../../style/public.scss";
 .menu{
   width: 200px;
   top: 0;
@@ -125,9 +139,12 @@ document.getElementById("router-container")!.style.width="calc(100% - 200px)" ;
 }
 
 .router-container{
+  position: absolute;
+  top: 0;
+  left: 200px;
   overflow: hidden;
   right: 0;
-  width: 1000px;
+  width: 1150px;
   margin-bottom: 0px;
   height: 100%;
   z-index: 88;

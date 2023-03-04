@@ -24,7 +24,7 @@
           <div class="table-bg" ref="tableContainer" style="width: 99%;">
               <el-table :data="baseInfoTableData" :border="true" 
                   ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
-                  :height="500">
+                  :height="450">
                   <el-table-column label="操作" min-width="30">
                       <template #default="scope">
                           <el-button type="danger" link @click="deleteUserManagement(scope.row)">删除</el-button>
@@ -162,5 +162,5 @@ loadBookManagementInfoList();
 </script>
 
 <style lang="scss" scoped>
-
+@import "../../style/public.scss";
 </style>
