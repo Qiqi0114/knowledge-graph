@@ -13,11 +13,14 @@ const service = axios.create({
 
 // 请求前置拦截器
 service.interceptors.request.use((config) => {
-  config.headers.token = sessionStorage.getItem(TOKEN_KEY);
-  if (config.method === 'post' && !config.data) {
-    config.data = config.params
-    config.params = null
+  if (config && config.headers) {
+    config.headers.token = sessionStorage.getItem(TOKEN_KEY);
+      if (config.method === 'post' && !config.data) {
+        config.data = config.params
+        config.params = null
+      }
   }
+
   return config
 }, (error) => {
   return Promise.reject(error)
