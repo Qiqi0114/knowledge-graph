@@ -10,11 +10,17 @@ const routes:Array<RouteRecordRaw> = [
   {
     path: "/login",
     name: "login",
+    meta: {
+      title: "知识图谱管理后台",
+    },
     component: () => import("../views/login/index.vue"),
   },
   {
     path: "/home",
     name: "home",
+    meta: {
+      title: "知识图谱管理后台",
+    },
     component: () => import("../views/home/index.vue"),
     children: [
       {
@@ -114,5 +120,8 @@ const router = createRouter({
   history:createWebHistory(),//创建路由模式为history
   routes:routes //引入路由表
 })
- 
+router.beforeEach((to, from, next) => {
+  window.document.title = to.meta.title
+  next()
+})
 export default router
