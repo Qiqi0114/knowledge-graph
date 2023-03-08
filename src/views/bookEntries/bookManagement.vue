@@ -25,19 +25,25 @@
               <el-table :data="baseInfoTableData" :border="true" 
                   ref="baseInfoTableDataRef" v-loading="loading" :header-cell-style="{ background: '#F5F6FA' }"
                   :height="450">
-                  <el-table-column label="操作" min-width="30">
+                  <el-table-column label="操作" min-width="50">
                       <template #default="scope">
                           <el-button type="danger" link @click="deleteUserManagement(scope.row)">删除</el-button>
                       </template>
                   </el-table-column>
                   <el-table-column prop="id" label="书籍id" min-width="130" />
-                  <el-table-column prop="bookName" label="书籍全称" min-width="120" />
+                  <el-table-column prop="bookName" label="书籍全称" min-width="250" :show-overflow-tooltip="true" />
                   <el-table-column prop="bookStatic" label="书籍状态" min-width="120">
                       <template #default="scope">
                           <el-button type="text" :disabled="scope.row.bookStatic ? true : false"
                               @click="updateActivationStatus(scope.row,true)">上架</el-button>
                           <el-button type="text" :disabled="scope.row.bookStatic ? false : true"
                               @click="updateActivationStatus(scope.row,false)">下架</el-button>
+                      </template>
+                  </el-table-column>
+                  <el-table-column label="操作" min-width="150">
+                      <template #default="scope">
+                          <el-button type="primary" link>查看图谱</el-button>
+                          <el-button type="primary" link>导出json</el-button>
                       </template>
                   </el-table-column>
               </el-table>
