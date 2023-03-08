@@ -64,7 +64,7 @@
     mode="horizontal"
   >
     <el-menu-item index="1">处理中心</el-menu-item>
-    <el-sub-menu style="margin-left:900px"  index="2">
+    <el-sub-menu style="margin-left: auto;"  index="2">
       <template #title>账号</template>
       <el-menu-item index="2-1" @click="goOut()">退出</el-menu-item>
     </el-sub-menu>
