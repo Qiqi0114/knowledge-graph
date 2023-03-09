@@ -10,7 +10,7 @@
         text-color="#fff"
         router
         :collapse="isCollapse"
-        :default-active="1"
+        :default-active="activeIndexMenu"
         @open="handleOpen"
         @close="handleClose"
       >
@@ -88,6 +88,8 @@ import store from "@/store";
 const route = useRoute();
 //头部默认选中
 const activeIndex = ref<string>('1');
+  const activeIndexMenu = ref<string>('/home/userManagement');
+  
 //退出
 const goOut = async() => {
   router.push({ path: "/login", query: {} })
