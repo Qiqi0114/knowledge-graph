@@ -39,7 +39,7 @@
                         <el-table-column prop="userStatic" label="用户状态" min-width="90">
                             <template #default="scope">
                                 <span v-if="scope.row.userStatic">激活</span>
-                                <span v-if="scope.row.userStatic">封禁</span>
+                                <span v-if="!scope.row.userStatic">封禁</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="roleId" label="角色id" min-width="120" :show-overflow-tooltip="true"/>
