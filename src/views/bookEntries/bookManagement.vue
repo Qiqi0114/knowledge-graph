@@ -42,7 +42,7 @@
                   </el-table-column>
                   <el-table-column label="操作" min-width="150">
                       <template #default="scope">
-                          <el-button type="primary" link>查看图谱</el-button>
+                          <el-button type="primary" link @click="seeAtlas(scope.row)">查看图谱</el-button>
                           <el-button type="primary" link>导出json</el-button>
                       </template>
                   </el-table-column>
@@ -56,6 +56,11 @@
                   @current-change="handleCurrentChange" />
           </div>
           <!--分页器 end-->
+          <el-dialog v-model="dialogFormVisible" title="查看图谱" style="width: 1200px;height: 700px;margin-top: 10px;">
+            <div>
+                
+            </div>
+          </el-dialog>
       </div>
   </div>
 </template>
@@ -144,6 +149,15 @@ try{
 }catch(error){}
 loading.value = false;
 }
+//查看图谱对话框
+const dialogFormVisible = ref<boolean>(false);
+//书籍id
+const bookId =ref<string>();
+//任务延期
+const seeAtlas = async (row: any) => {
+    dialogFormVisible.value = true;
+    bookId.value = row.id;
+};
 //获取列表
 const loadBookManagementInfoList = async () => {
 loading.value = true;
