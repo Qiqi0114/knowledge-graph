@@ -8,9 +8,9 @@
                       <el-form ref="searchFormRef" :model="searchForm" :inline="true" style="width:100%">
                           <el-row>
                               <el-col :span="6">
-                                  <el-form-item label="姓名" prop="bookName">
+                                  <el-form-item label="书籍名称" prop="bookName">
                                       <el-input v-model.bookName="searchForm.bookName"
-                                        @input="loadBookManagementInfoList()" placeholder="请输入姓名" clearable/>
+                                        @input="loadBookManagementInfoList()" placeholder="请输入书籍名称" clearable/>
                                   </el-form-item>
                               </el-col>
                           </el-row>
@@ -43,7 +43,7 @@
                   <el-table-column label="操作" min-width="150">
                       <template #default="scope">
                           <el-button type="primary" link @click="seeAtlas(scope.row)">查看图谱</el-button>
-                          <el-button type="primary" link>导出json</el-button>
+                          <el-button type="primary" link @click="uploadJson(scope.row)">导出json</el-button>
                       </template>
                   </el-table-column>
               </el-table>
@@ -61,12 +61,16 @@
                 
             </div>
           </el-dialog>
+          <el-dialog v-model="dialogFormVisible1" title="选择环境" style="width: 450px;height: 200px;margin-top: 60px;">
+            <el-button @click="uploadJsonConfirm('1')">开发环境</el-button>
+            <el-button @click="uploadJsonConfirm('2')">生产环境</el-button>
+          </el-dialog>
       </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { BookManagementAPI, deleteBookManagementAPI, getBookOnAndOffAPI } from "../../api/bookManagement";
+import { BookManagementAPI, deleteBookManagementAPI, getBookOnAndOffAPI, getUploadJsonAPI } from "../../api/bookManagement";
 import { reactive } from "@vue/reactivity";
 import { ElMessage, ElMessageBox, FormInstance } from "element-plus";
 import { onMounted, ref } from "vue";
@@ -158,6 +162,32 @@ const seeAtlas = async (row: any) => {
     dialogFormVisible.value = true;
     bookId.value = row.id;
 };
+const dialogFormVisible1 = ref<boolean>(false);
+//书籍id
+const bookId1 =ref<string>('');
+//下载Json
+const uploadJson = async(row:any)=>{
+    dialogFormVisible1.value = true;
+    bookId1.value = row.id;
+}
+let url: any = import.meta.env // 配置不同环境的域名信息等
+const uploadJsonConfirm =async (type:string) => {
+    //过渡效果
+    loading.value = true;
+    location.href = url.VITE_APP_BASE_API+'/service_book/service/entry/getJsonText'+'?id='+bookId.value+'&type='+type
+      const res = await getUploadJsonAPI({id:bookId1.value,type:type});
+      if (res.data.code == 200) {
+          ElMessage({
+              message: "下载成功",
+              duration: 1500,
+              type: "success",
+          });
+      } else {
+          ElMessage.error(res.data.msg)
+      }
+      dialogFormVisible1.value = false
+      loading.value = false;
+}
 //获取列表
 const loadBookManagementInfoList = async () => {
 loading.value = true;
