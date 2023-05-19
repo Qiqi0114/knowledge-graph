@@ -1,5 +1,5 @@
 import request from "../utils/request"
-//获取用户管理信息列表
+//获取书籍列表
 export function BookManagementAPI(
     params: {
       //分页参数
@@ -40,3 +40,29 @@ export function BookManagementAPI(
       method: 'put',
     })
   }
+
+    //下载json
+    export function getUploadJsonAPI(
+      params: {
+        //id
+        id:string,
+        //类型
+        type:string
+      }) {
+      return request({
+        url: '/service_book/service/entry/getJsonText'+'?id='+params.id+'&type='+params.type,
+        method: 'get',
+      })
+    }
+
+    //查看图谱
+    export function getPhotoAPI(
+      params: {
+        //id
+        id:string,
+      }) {
+      return request({
+        url: '/service_book/service/entry/getEntryTreeByBook'+'?id='+params.id,
+        method: 'get',
+      })
+    }
