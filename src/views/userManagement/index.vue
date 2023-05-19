@@ -204,6 +204,11 @@ const addConfirm = async() =>{
                 type: "error",
             });
         }
+        addForm.userForm.userName='',
+        addForm.userForm.userSex='',
+        addForm.userForm.userPhone='',
+        addForm.userForm.userEmail='',
+        addForm.userForm.userStatic=false
     }catch(error){
         console.log('error');
     }
